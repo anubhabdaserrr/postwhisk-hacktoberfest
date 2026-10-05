@@ -1,0 +1,5 @@
+  {
+    "rewrites": [
+      { "source": "/cloud/:path*", "destination": "https://ollama.com/:path*" }
+    ]
+  }
