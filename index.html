@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Postwhisk – whisk rough text into social posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1><span class="bowl" aria-hidden="true">🥣</span>Postwhisk</h1>
+  <p>Toss in rough text. Get back posts that behave.</p>
+  <span class="sticker-note">nothing saved</span>
+</header>
+
+<main class="layout">
+  <section class="panel" aria-label="Input">
+    <fieldset class="block">
+      <legend>Model connection</legend>
+      <div class="seg" role="radiogroup" aria-label="Connection type">
+        <button type="button" class="seg-btn active" data-mode="cloud" role="radio" aria-checked="true">Ollama API</button>
+        <button type="button" class="seg-btn" data-mode="local" role="radio" aria-checked="false">Local Ollama</button>
+      </div>
+
+      <div id="cloudFields">
+        <label for="apiKey">Ollama API key</label>
+        <input id="apiKey" type="password" placeholder="Paste your API key" autocomplete="off">
+      </div>
+      <div id="localFields" hidden>
+        <label for="serverUrl">Where is your Ollama server running?</label>
+        <input id="serverUrl" type="url" value="http://localhost:11434" placeholder="http://localhost:11434" autocomplete="off">
+      </div>
+
+      <label for="model">Model name</label>
+      <input id="model" type="text" autocomplete="off">
+
+      <p id="privacy" class="privacy"></p>
+    </fieldset>
+
+    <div class="block">
+      <div class="row">
+        <label for="source">Your rough text</label>
+        <button id="sample" class="sticker-btn" type="button">🎲 Try a sample</button>
+      </div>
+      <textarea id="source" maxlength="2000" rows="8" placeholder="e.g. we launched new feature yesterday, users can now export reports in pdf, took 3 months, team worked hard, try it free this week"></textarea>
+      <div class="count"><span id="srcCount">0</span> / 2000</div>
+    </div>
+
+    <div class="block">
+      <span class="label">Tone</span>
+      <div id="tones" class="chips" role="radiogroup" aria-label="Tone"></div>
+    </div>
+
+    <div class="block">
+      <span class="label">Whisk it for</span>
+      <div id="platforms" class="chips multi"></div>
+    </div>
+
+    <div class="actions">
+      <button id="go" class="primary" type="button">🥣 Whisk it up!</button>
+      <button id="stop" class="ghost" type="button" hidden>Stop</button>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="results" id="results" aria-label="Generated posts">
+    <div class="empty" id="empty">
+      <div class="big" aria-hidden="true">🥣</div>
+      <p>The bowl is empty.</p>
+      <p class="sub">Add some rough text (or try a sample), pick a tone, then whisk.</p>
+    </div>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
